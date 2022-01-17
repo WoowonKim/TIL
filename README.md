@@ -1,8 +1,6 @@
-# TIL
+## 💻 TIL - Today I Learned 💻
 
-> Today I Learned
+하루동안 공부한 내용을 매일매일 정리하기
 
 
-
-내가 오늘 무엇을 배웠는지 정리해두는 레포지토리
 
