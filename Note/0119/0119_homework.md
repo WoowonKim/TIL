@@ -25,7 +25,7 @@ def get_middle_char(arg):
     else:
         print(arg[a-1:a+1])
 
-get_middle_char('ssafy')
+get_middle_char('apple')
 get_middle_char('coding')
 ```
 
