@@ -11,7 +11,6 @@ def get_secret_word(args):
     for idx in args:
         print(chr(idx),end="")
 
-
 get_secret_word([83, 89])
 ```
 
