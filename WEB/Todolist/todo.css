@@ -1,0 +1,35 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  text-align: center;
+}
+
+h2 {
+  margin-top: 50px;
+}
+
+.regist {
+  margin-top: 10px;
+
+}
+
+.table {
+  border: 1px solid #345;
+  align-items: center;
+  margin: 10px auto;
+  width: 50%;
+}
+
+.table td {
+  border: 1px solid #456;
+}
+
+.regist > input {
+  width: 30%;
+}
+
+
+.table, .table > td {
+  border-collapse: collapse;
+}
