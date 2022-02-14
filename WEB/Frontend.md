@@ -10,7 +10,7 @@
   - target
     - _self: 기본적으로 들어가있는 속성
     - _blank : 새탭에 링크 열기
-  - 같은 페이지에서 원하는 위치로 이동 가능(id 활용 예 <a href="#top">)
+  - 같은 페이지에서 원하는 위치로 이동 가능(id 활용 예 <a href="#top"\>)
 - block, inline 성질의 차이점과 주요 태그
   - block : 엘리먼트의 내용과 상관 없이 라인 전체를 차지
     - div, p, h, ul, section
@@ -91,7 +91,12 @@
     - justify-content : 메인 축의 정렬을 제어
     - align-items : 교차축의 정렬을 제어
     - align-content :wrap 속성에 의해서 여러 줄이 발생한 경우의 교차축 정렬
-- flex container
+- flex item
+  - 주요 속성
+    - order : item의 배치 순서 제어
+    - flex-basis : item의 너비를 지정
+    - flex-grow : 팽창, 기본 0,  음수 불가능
+    - align-self : 아이템 단위의 교차축 정렬
 
 ## Javascript
 
