@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ssafy.dao.TestDao">
+	<select id="selectMember" resultType="member">
+		select id, name, addr, email, date_format(join_date, '%Y-%m-%d') as joinDate
+		  from mybatis_member
+		 order by id
+	</select>
+	<select id="selectMemberById" parameterType="string" resultType="member">
+		select id, name, addr, email, date_format(join_date, '%Y-%m-%d') as joinDate
+		  from mybatis_member
+		 where id = #{id}
+	</select>
+	<select id="selectMemberByInfo" parameterType="member" resultType="string">
+	select name
+	  from mybatis_member
+	 where id = #{id}
+	   and email = #{email}
+	</select>
+	<insert id="insertMember" parameterType="member">
+		insert into mybatis_member (
+			id, name, email, addr
+		) values (
+			#{id},#{name},#{email},#{addr}
+		)
+	</insert>
+	<delete id="deleteMember" parameterType="string">
+		delete from mybatis_member
+		where id = #{id}
+	</delete>
+	<update id="updateMember" parameterType="member">
+		update mybatis_member
+		set email = #{email}
+		where id = #{id}
+	</update>
+</mapper> 
