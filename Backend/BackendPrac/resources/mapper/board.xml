@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.ssafy.backprac.dao.BoardDao">
+	<resultMap type="Board" id="boardMap">
+		<result column="no" property="no"/>
+		<result column="writer" property="writer"/>
+		<result column="title" property="title"/>
+		<result column="content" property="content"/>
+		<result column="reg_date" property="regDate"/>
+		<result column="view_cnt" property="viewCnt"/>
+	</resultMap>
+	
+	<!-- 게시글 등록하기 -->
+	<insert id="insertBoard" parameterType="Board">
+		INSERT INTO board (title, writer, content)
+		VALUES (#{title}, #{writer}, #{content})
+	</insert>
+	
+	<!-- 전체 글 조회 -->
+	<select id="selectBoard" resultMap="boardMap">
+		SELECT id, content, title, view_cnt, date_format(reg_date, '%Y-%M-%d') as reg_date, writer
+		FROM board
+	</select>
+	
+	<!-- 상세 게시글 조회 -->
+	<select id="selectBoardById" parameterType="int" resultType="Board">
+		SELECT id, title, writer, content, view_cnt as viewCnt, date_format(reg_date, '%Y-%m-%d %H:%i:%s') as regDate
+		FROM board
+		WHERE id = #{id}
+	</select>
+	
+	<!-- 조회수 증가 -->
+	<update id="updateViewCnt" parameterType="int">
+		UPDATE board
+		SET view_cnt = view_cnt+1
+		WHERE id = #{id}
+	</update>
+	
+	<!-- 게시글 삭제 -->
+	<delete id="deleteBoard" parameterType="int">
+		DELETE FROM board
+		WHERE id = #{id}
+	</delete>
+	
+	<!-- 게시글 업데이트 지금 현재 시간을 수정한 것은 수정날짜라는 의미로다가 사용을 해본것임 -->
+	<update id="updateBoard" parameterType="Board">
+		UPDATE board
+		SET title = #{title}, content=#{content}, reg_date = now()
+		WHERE id = #{id}
+	</update>	
+</mapper>

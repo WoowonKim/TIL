@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.ssafy.backprac.dao.EmpDao">
+	
+	<select id="selectEmp" resultType="Emp">
+		SELECT e.empno empno, e.ename ename, e.job job, e.deptno deptno, d.dname dname
+		  FROM emp e
+		 INNER JOIN dept d
+		    ON e.deptno = d.deptno  
+	</select>
+	
+	<select id="selectEmpById" parameterType="String" resultType="Emp">
+		SELECT  e.empno empno, e.ename ename, e.job job, e.deptno deptno, d.dname dname
+		  FROM emp e
+		 INNER JOIN dept d
+		    ON e.deptno = d.deptno
+		 WHERE e.empno = #{empno} and e.ename = #{ename}
+	</select>
+		
+</mapper>
