@@ -6,7 +6,17 @@ public class Board {
 	private String title;
 	private String content;
 	private int viewCnt;
-	private String timeStamp;
+	private String regDate;
+	
+	public Board() {
+	}
+
+	public Board(String title, String writer, String content) {
+		super();
+		this.title = title;
+		this.writer = writer;
+		this.content = content;
+	}
 	
 	public int getNo() {
 		return no;
@@ -38,11 +48,11 @@ public class Board {
 	public void setViewCnt(int viewCnt) {
 		this.viewCnt = viewCnt;
 	}
-	public String getTimeStamp() {
-		return timeStamp;
+	public String getRegDate() {
+		return regDate;
 	}
-	public void setTimeStamp(String timeStamp) {
-		this.timeStamp = timeStamp;
+	public void setRegDate(String timeStamp) {
+		this.regDate = timeStamp;
 	}
 	
 	

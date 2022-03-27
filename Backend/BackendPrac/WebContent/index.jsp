@@ -21,10 +21,10 @@
 			<input type="submit" value="로그아웃">
 		</form>
 		<div>
-		<a href="">게시판이동하기</a>
+		<a href="${pageContext.request.contextPath }/main?action=board">게시판이동하기</a>
 		</div>
 		<div>
-		<a href="">직원목록 조회하기</a>
+		<a href="${pageContext.request.contextPath }/main?action=emplist">직원목록 조회하기</a>
 		</div>
 	</c:if>
 </body>
