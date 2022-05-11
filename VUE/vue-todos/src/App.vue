@@ -1,17 +1,31 @@
 <template>
   <div id="app">
-    <img alt="Vue logo" src="./assets/logo.png">
-    <HelloWorld msg="Welcome to Your Vue.js App"/>
+    <h2>Todo List App</h2>
+    <h3>전체 할일의 수 {{$store.state.todos.length}}</h3>
+    <h3>완료 Todo {{doneCount}}</h3>
+    <h3>미완료 Todo {{undoneCount}}</h3>
+    <todo-list></todo-list>
+    <todo-list-write></todo-list-write>
   </div>
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld.vue'
+import TodoList from '@/components/TodoList.vue'
+import TodoListWrite from '@/components/TodoListWrite.vue'
 
 export default {
   name: 'App',
   components: {
-    HelloWorld
+    TodoList,
+    TodoListWrite
+  },
+  computed:{
+    doneCount() {
+      return this.$store.getters.doneTodosCount
+    },
+    undoneCount(){
+      return this.$store.getters.undoneTodosCount
+    }
   }
 }
 </script>
