@@ -18,6 +18,13 @@ import org.springframework.web.bind.annotation.RestController;
 import com.ssafy.board.dto.Board;
 import com.ssafy.board.service.BoardService;
 
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiImplicitParam;
+import io.swagger.annotations.ApiImplicitParams;
+import io.swagger.annotations.ApiOperation;
+import io.swagger.annotations.ApiParam;
+
+@Api(tags = "게시물 ")
 @CrossOrigin
 @RestController
 @RequestMapping("/api/board")
@@ -26,6 +33,9 @@ public class BoardController {
 	@Autowired
 	private BoardService boardService;
 	
+	@ApiOperation(value = "게시글 조회",
+			notes = "검색어(key)에 따른 게시물")
+	@ApiImplicitParams({@ApiImplicitParam(name="key", value="검색어")})
 	@GetMapping
 	public ResponseEntity<List<Board>> list(@RequestParam(defaultValue = "") String key){
 		return new ResponseEntity<List<Board>>(
