@@ -1,32 +1,71 @@
 <template>
   <div id="app">
-    <nav>
-      <router-link to="/">Home</router-link> |
-      <router-link to="/about">About</router-link>
-    </nav>
-    <router-view/>
+    <header-nav></header-nav>
+    <router-view></router-view>
   </div>
 </template>
 
+<script>
+import HeaderNav from "@/components/common/HeaderNav.vue"
+export default {
+  components: {
+    HeaderNav
+  }
+}
+</script>
 <style>
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  list-style: none;
+}
+.text-center {
   text-align: center;
-  color: #2c3e50;
+}
+.container {
+  margin: 0px 30px;
 }
 
-nav {
-  padding: 30px;
+.view {
+  width: 80%;
+  padding: 12px 20px;
+  margin: 8px 0;
+  display: inline-block;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  box-sizing: border-box;
+  color: #787878;
+  font-size: medium;
 }
 
-nav a {
-  font-weight: bold;
-  color: #2c3e50;
+label {
+  display: inline-block;
+  width: 130px;
 }
 
-nav a.router-link-exact-active {
-  color: #42b983;
+.btn {
+  width: 8%;
+  background-color: #d0d3d0;
+  color: rgb(80, 82, 79);
+  padding: 14px 20px;
+  margin: 8px;
+  border: 1px solid #787878;
+  border-radius: 4px;
+  font-size: large;
+  cursor: pointer;
+}
+
+/* 테이블 CSS */
+.board-list {
+  border-collapse: collapse;
+  width: 100%;
+  text-align: center;
+  margin: auto;
+}
+
+.board-list td,
+.board-list th {
+  border: 1px solid black;
 }
 </style>

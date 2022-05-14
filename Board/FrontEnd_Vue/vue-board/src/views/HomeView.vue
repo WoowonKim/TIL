@@ -1,18 +1,28 @@
 <template>
-  <div class="home">
-    <img alt="Vue logo" src="../assets/logo.png">
-    <HelloWorld msg="Welcome to Your Vue.js App"/>
+  <div>
+    <br />
+    <div class="text-center">
+      <h1>{{ message }}</h1>
+    </div>
+    <br />
+    <board-search></board-search>
   </div>
 </template>
 
 <script>
-// @ is an alias to /src
-import HelloWorld from '@/components/HelloWorld.vue'
-
+import BoardSearch from '@/components/board/BoardSerch.vue'
 export default {
-  name: 'HomeView',
-  components: {
-    HelloWorld
+  components:{
+    BoardSearch
+  },
+  data(){
+    return{
+      message: "김우원의 게시판"
+    }
   }
 }
 </script>
+
+<style>
+
+</style>
