@@ -107,3 +107,84 @@ function Modal(){
   )
 }
 ```
+
+## 동적 UI 만들기
+
+> 유저 조작에 따라 형태가 바뀌는 UI
+
+1. UI 디자인 하기
+
+2. UI의 현재 상태 State로 저장
+
+3. State에 따라서 UI가 어떻게 보일지 조건 or 반복문 작성 
+
+   - JSX애서 조건문 반복문 작성법 (3항 연산자, map 활용)
+
+     ```jsx
+     {
+         modal == true ? <Modal color="skyblue" titleIdx={titleIdx} title={title} setTitle={setTitle}/> : null
+     }
+     ```
+
+     ```jsx
+     {
+             title.map(function(a, i){
+               return(
+                 <div className="list">
+                   <h4 onClick={(e)=>{
+                     setModal(!modal)
+                     setTitleIdx(i)
+                     }}>{a}
+                     <span onClick={(e)=>{
+                       e.stopPropagation();
+                       let copy = [...cnts]
+                       copy[i]++
+                       addCnts(copy)
+                     }}>👍</span> {cnts[i]}
+                     <button onClick={(e)=>{
+                       e.stopPropagation()
+                       let copy = [...title]
+                       copy.splice(i,1)
+                       cnts.splice(i,1)
+                       setTitle(copy)
+                     }}>삭제</button>
+                   </h4>
+                   <p>2월 17일 발행</p>
+                 </div>
+               )
+             })
+     }
+     ```
+
+## PROPS
+
+> 자식 컴포넌트가 부모 컴포넌트에 있던 state를 사용하려면 부모가 props로 state를 전송해야 한다.
+
+- props로 state 전달하기
+  - <자식컴포넌트 변수이름={state이름}/}
+
+- 전달받은 state 사용하기
+  - props.state이름
+
+```jsx
+{//부모 컴포넌트
+    modal == true ? <Modal color="skyblue" titleIdx={titleIdx} title={title} setTitle={setTitle}/> : null
+}
+```
+
+```jsx
+function Modal(props){//자식컴포넌트
+  return (
+    <div className='Modal' style={{background: props.color}}>
+      <h4>{props.title[props.titleIdx]}</h4>
+      <p>날짜</p>
+      <p>상세내용</p>
+      <button onClick={()=>{
+        let copy = [...props.title]
+        copy[0] = '여자 코트 추천'
+        props.setTitle(copy)
+      }}>change</button>
+    </div>
+  )
+```
+
