@@ -1,11 +1,12 @@
 /* eslint-disable */
-import logo from './logo.svg';
 import './App.css';
 import { useState } from 'react';
 function App() {
-  let [title, b] = useState(['남자 코트 추천','강남 우동 맛집','파이썬 독학']);
-  let [cnt, addCnt] = useState(0);
-  let head = 'blog';
+  let [title, setTitle] = useState(['남자 코트 추천','강남 우동 맛집','파이썬 독학']);
+  let [cnts, addCnts] = useState([0,0,0]);
+  let [modal, setModal] = useState(false);
+  let [titleIdx, setTitleIdx] = useState(0);
+  let [input, setInput] = useState('');
   return (
     <div className="App">
       <div className="black-nav">
@@ -14,12 +15,12 @@ function App() {
       <span onClick={()=>{
           let copy = [...title];
           copy[0] = '여자코트 추천'
-          b(copy)}} >change</span>
+          setTitle(copy)}} >change</span>
       <button onClick={()=>{
         let copy = [...title];
-        b(copy.sort())
+        setTitle(copy.sort())
       }}>정렬</button>
-      <div className="list">
+      {/* <div className="list">
         <h4>{title[0]} <span onClick={()=>{addCnt(cnt+1)}}>👍</span> {cnt} </h4>
         <p>2월 17일 방행</p>
       </div>
@@ -28,19 +29,64 @@ function App() {
         <p>2월 17일 방행</p>
       </div>
       <div className="list">
-        <h4>{title[2]}</h4>
+        <h4 onClick={()=>{
+          setModal(!modal)
+          }}>{title[2]}</h4>
         <p>2월 17일 방행</p>
-      </div>
-      <Modal></Modal>
+      </div> */}
+      {
+        title.map(function(a, i){
+          return(
+            <div className="list">
+              <h4 onClick={(e)=>{
+                setModal(!modal)
+                setTitleIdx(i)
+                }}>{a}
+                <span onClick={(e)=>{
+                  e.stopPropagation();
+                  let copy = [...cnts]
+                  copy[i]++
+                  addCnts(copy)
+                }}>👍</span> {cnts[i]}
+                <button onClick={(e)=>{
+                  e.stopPropagation()
+                  let copy = [...title]
+                  copy.splice(i,1)
+                  cnts.splice(i,1)
+                  setTitle(copy)
+                }}>삭제</button>
+              </h4>
+              <p>2월 17일 발행</p>
+            </div>
+          )
+        })
+      }
+      <input onChange={(e)=>{
+        setInput(e.target.value)
+      }} ></input>
+      <button onClick={()=>{
+        let copy = [...title]
+        copy.push(input)
+        cnts.push(0);
+        setTitle(copy)
+      }}>등록</button>
+      {
+        modal == true ? <Modal color="skyblue" titleIdx={titleIdx} title={title} setTitle={setTitle}/> : null
+      }
     </div>
   );
 }
-function Modal(){
+function Modal(props){
   return (
-    <div className='Modal'>
-      <h4>제목</h4>
+    <div className='Modal' style={{background: props.color}}>
+      <h4>{props.title[props.titleIdx]}</h4>
       <p>날짜</p>
       <p>상세내용</p>
+      <button onClick={()=>{
+        let copy = [...props.title]
+        copy[0] = '여자 코트 추천'
+        props.setTitle(copy)
+      }}>change</button>
     </div>
   )
 }

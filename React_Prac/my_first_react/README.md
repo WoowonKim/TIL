@@ -10,13 +10,13 @@
 - Node.js 설치
 - 터미널에 명령어 입력
 
-``` 
+``` powershell
 npx create-react-app 프로젝트 명
 ```
 
 - 미리보기 명령어
 
-```
+```powershell
 npm start
 ```
 
