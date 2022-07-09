@@ -1,70 +1,122 @@
-# Getting Started with Create React App
+# React-Router-Dom
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+### React에서 권장하는 public 폴더 이미지 사용법
 
-## Available Scripts
+``` jsx
+<img src={process.env.PUBLIC_URL + '/logo192.png'} /> 
+```
 
-In the project directory, you can run:
+## react-router-dom 설치
 
-### `npm start`
+1. 설치
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+``` powershell
+npm install react-router-dom@6
+```
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+2. index.js에서 import 후, <App/> 감싸기
 
-### `npm test`
+``` jsx
+import { BrowserRouter } from "react-router-dom";
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+const root = ReactDOM.createRoot(document.getElementById('root'));
+root.render(
+  <React.StrictMode>
+      <BrowserRouter>
+        <App />
+      </BrowserRouter>
+  </React.StrictMode>
+); 
+```
 
-### `npm run build`
+## 라우터로 페이지 나누기
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+1. Routes, Route import
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+```jsx
+import { Routes, Route, Link } from 'react-router-dom'
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+function App(){
+  return (
+    (생략);
+    <Routes>
+      <Route path="/detail" element={ <div>상세페이지</div> } />
+      <Route path="/about" element={ <div>어바웃페이지</div> } />
+    </Routes>
+  )
+}
+```
 
-### `npm run eject`
+> path에 "*"입력 시 유저가 이상한 경로로 접속했을 때 "없는 페이지" 작성 가능 (404)
+>
+> *이 모든 경로를 뜻하기 때문
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+## 페이지 이동 버튼
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+``` jsx
+<Link to="/">홈</Link>
+<Link to="/detail">상세페이지</Link>
+```
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+또는 useNavigate import 후
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+``` jsx
+function App(){
+  let navigate = useNavigate()
+  
+  return (
+    (생략);
+    <button onClick={()=>{ navigate('/detail') }}>상세페이지</button>
+  )
+}
+```
 
-## Learn More
+## nested routes / outlet
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+1. /about/member, /about/location을 만드는 두가지 방법
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+``` jsx
+<Route path="/about/member" element={ <div>멤버</div> } />
+<Route path="/about/location" element={ <div>위치</div> } />
+```
 
-### Code Splitting
+``` jsx
+<Route path="/about" element={ <About/> } >  
+  <Route path="member" element={ <div>멤버</div> } />
+  <Route path="location" element={ <div>위치</div> } />
+</Route>
+```
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+아래와 같은 방법을 Nested routes라고 부른다
 
-### Analyzing the Bundle Size
+2. Nested  Routes안의 엘리먼트를 보여주기 위해서는 <Outlet>으로 엘리먼트 위치를 지정해 주어야 한다.
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+``` jsx
+function About(){
+  return (
+    <div>
+      <h4>about페이지</h4>
+      <Outlet></Outlet>
+    </div>
+  )
+}
+```
 
-### Making a Progressive Web App
+## path parameter
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
+``` jsx
+<Route path="/detail/:id" element={ <Detail shoes={shoes}/> }/>
+```
 
-### Advanced Configuration
+위 처럼 코드를 작성하면 id에 무엇이 오든 detail페이지에 parameter로 전달할 수 있다
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
+useParams를 import하여 경로에 있는 변수를 사용 가능하다.
 
-### Deployment
+``` jsx
+import {useParams} from "react-router-dom"
+.
+.
+.;
+let {id} = useParams();
+```
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)

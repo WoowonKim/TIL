@@ -1,8 +1,8 @@
 import './App.css';
-import { Navbar, Container, Nav, AccordionButton} from 'react-bootstrap';
+import { Navbar, Container, Nav} from 'react-bootstrap';
 import { useState } from 'react';
 import data from './data';
-import { Routes, Route, Link, useNavigate, Outlet} from 'react-router-dom';
+import { Routes, Route, useNavigate, Outlet} from 'react-router-dom';
 import Detail from './routes/Detail';
 function App() {
 let [shoes] = useState(data);
@@ -14,7 +14,7 @@ let navigate = useNavigate();
           <Navbar.Brand href="#home">Shop</Navbar.Brand>
           <Nav className="me-auto">
             <Nav.Link onClick={()=>{navigate('/')}}>Home</Nav.Link>
-            <Nav.Link onClick={()=>{navigate('/detail')}}>Cart</Nav.Link>
+            <Nav.Link onClick={()=>{navigate('/detail')}}>Detail</Nav.Link>
           </Nav>
         </Container>
       </Navbar>
@@ -34,22 +34,8 @@ let navigate = useNavigate();
               </div>
             </div>
           </div>}/>
-        <Route path='/detail' element={
-        <div>
-          <Detail shoe={shoes[0]}/>
-        </div>
-        }/>
-        <Route path="/about" element={<About/>}>
-          <Route path='member' element={<div>멤버임</div>}/>
-          <Route path="location" element={<div>위치정보임</div>}/>
-        </Route>
-        <Route path="/event" element={<div><h2>오늘의 이벤트</h2><Outlet></Outlet></div>}>
-          <Route path='one' element={<div>첫 주문시 양배추즙 서비스</div>}/>
-          <Route path="two" element={<div>생일기념 쿠폰 받기</div>}/>
-        </Route>
-        <Route path="*" element={<div>404커스텀 가능</div>}/>
+        <Route path='/detail/:id' element={<div><Detail shoe={shoes}/></div>}/>
       </Routes>
-
       
     </div>
   );
