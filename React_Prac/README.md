@@ -442,3 +442,127 @@ useEffect(()=>{
 }, [ ])
 ```
 
+# [React] Redux & Redux Toolkit
+
+> Redux-Toolkit : Redux개발자가 만든 Redux 개선 버전
+
+## Redux
+
+Vuex와 비슷하다. State가 많아지고, 해당 State를 사용하는 Component가 많아지면 Props가 굉장히 많아지기 때문에, 어디서든 State를 사용할 수 있게 해준다.
+
+### 설치
+
+``` powershell
+npm install @reduxjs/toolkit react-redux
+```
+
+### 세팅
+
+1. store.js 생성 (state 저장소)
+2. 아래 코드 복붙
+
+``` jsx
+import { configureStore } from '@reduxjs/toolkit'
+
+export default configureStore({
+  reducer: { }
+}) 
+```
+
+3. index.js에서 store와 Provider를 import하고 <Provider store={import한거}>로  <App/>을 감싼다.
+
+   
+
+## Redux 사용법
+
+### store에 State 보관하는 법
+
+> store.js안에서 만들어도 되지만... 전에 Vuex로 프로젝트를 경험해본 바로, state별로 따로 js파일을 만든후 import export하는게 좋을 것 같다.
+
+1.  '@reduxjs/toolkit'에서 createSlice import 후, state 생성
+   - { name : 'state이름', initialState : 'state값' }
+2. configureStore안에 등록
+   - {작명 : createSlice로 만든것.reducer} (만든사람이 이렇게 하란다.)
+
+``` jsx
+import { configureStore, createSlice } from '@reduxjs/toolkit'
+
+let user = createSlice({
+  name : 'user',
+  initialState : 'kim'
+})
+
+export default configureStore({
+  reducer: {
+    user : user.reducer
+  }
+}) 
+```
+
+### store의 state 사용법
+
+1. 사용하고자 하는 컴포넌트에서 import { useSelector } from "react-redux"
+
+2. useSelector((state) => { return state } )로 state를 가져올 수 있음
+   - useSelector((state) => { return state.user } )로 특정 state만 가져오기 가능
+
+``` jsx
+let a = useSelector((state) => { return state } )
+```
+
+### store의 state 수정법
+
+> 뭐가 많고 복잡하다...
+
+1. slice 안에 reducers: {} 만들고 안에 함수를 작성한다.
+   - 기존 state를 인자로 받을 수 있다.
+   - 둘째 인자부터 입력받은 파라미터를 사용할 수 있다.
+     - 뒤에 .payload를 붙이고 사용해야한다.
+   - return 값으로 state를 수정한다.
+2. 작성한 함수를 export한다.
+3. 원할 때 import 하여 사용하되 dispatch로 감싸야 한다.
+
+```jsx
+import {createSlice} from "@reduxjs/toolkit"
+let stock = createSlice({
+  name : 'stock',
+  initialState : [
+    {id : 0, name : 'White and Black', count : 2},
+    {id : 2, name : 'Grey Yordan', count : 1}
+  ],
+  reducers : {
+    addStock(state, action){
+      state.push(action.payload)
+    },
+    increaseCount(state, action){
+      state.find(x => x.id == action.payload).count += 1
+    },
+    delStock(state, action){
+      let item = state.findIndex(x=> x.id == action.payload)
+      state.splice(item,1)
+    }
+  }
+})
+export let {addStock, increaseCount, delStock} = stock.actions
+export default stock
+```
+
+> Redux 개발자의 마음인지 state가 Array나 object인 경우 state를 직접 수정해도 잘 작동된다.
+>
+> 그래서 그냥 일반 숫자나 문자도 object에 담는 경우도 있다고 한다.
+
+``` jsx
+<button className="btn btn-danger" onClick={()=>{
+        if(stocks.find(x => x.id == item.id) != null){
+            dispatch(increaseCount(item.id))
+        }
+        else {
+            dispatch(addStock(
+                {id : item.id, name : item.title, count : 1}
+            ))
+        }
+    }}>주문하기</button> 
+```
+
+
+
