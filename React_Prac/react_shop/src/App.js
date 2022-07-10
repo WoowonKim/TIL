@@ -6,6 +6,7 @@ import data from './data';
 import { Routes, Route, useNavigate} from 'react-router-dom';
 import Detail from './routes/Detail';
 import axios from 'axios';
+import Cart from './routes/Cart'
 function App() {
   let [shoes, setShoes] = useState(data);
   let navigate = useNavigate();
@@ -19,6 +20,7 @@ function App() {
           <Nav className="me-auto">
             <Nav.Link onClick={()=>{navigate('/')}}>Home</Nav.Link>
             <Nav.Link onClick={()=>{navigate('/detail/0')}}>Detail</Nav.Link>
+            <Nav.Link onClick={()=>{navigate('/cart')}}>Cart</Nav.Link>
           </Nav>
         </Container>
       </Navbar>
@@ -29,9 +31,9 @@ function App() {
           <div className='container'>
             <div className='row'>
                 {
-                  shoes.map(function(shoe){
+                  shoes.map(function(shoe, i){
                     return(
-                      <Card shoe={shoe}/>
+                      <Card shoe={shoe} key={i}/>
                     )
                   })
                 }
@@ -60,6 +62,7 @@ function App() {
         <Route path='/detail/:id' element={
           <div><Detail shoes={shoes}/></div>
         }/>
+        <Route path='/cart' element={<div><Cart></Cart></div>}></Route>
       </Routes>
     </div>
   );
@@ -68,10 +71,11 @@ function App() {
 export default App;
 
 function Card(props) {
+  let navigate = useNavigate()
   return(
     <div className="col-md-4">
       <img alt='' src={"https://codingapple1.github.io/shop/shoes"+(props.shoe.id+1)+".jpg"} width="80%"/>
-      <h4>{props.shoe.title}</h4>
+      <h4 onClick={()=>navigate(('/detail/'+props.shoe.id))}>{props.shoe.title}</h4>
       <p>{props.shoe.price}</p>
     </div>
   );

@@ -1,8 +1,11 @@
 import {useEffect, useState } from "react";
 import {useParams} from "react-router-dom"
 import {Nav} from "react-bootstrap";
-
+import {useDispatch, useSelector} from "react-redux"
+import {addStock, increaseCount} from "./../store/stockSlice"
 function Detail(props){
+  let dispatch = useDispatch()
+  let stocks = useSelector((state)=>state.stock)
   useEffect(()=>{
     let a = setTimeout(() => {
       setSale(false);
@@ -43,7 +46,16 @@ function Detail(props){
           <h4 className="pt-5">{item.title}</h4>
           <p>{item.content}</p>
           <p>{item.price}</p>
-          <button className="btn btn-danger">주문하기</button> 
+          <button className="btn btn-danger" onClick={()=>{
+            if(stocks.find(x => x.id == item.id) != null){
+              dispatch(increaseCount(item.id))
+            }
+            else {
+              dispatch(addStock(
+              {id : item.id, name : item.title, count : 1}
+            ))
+          }
+          }}>주문하기</button> 
         </div>
       </div>
       <Nav variant="tabs" defaultActiveKey="link0">
