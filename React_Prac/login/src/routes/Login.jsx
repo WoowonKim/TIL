@@ -1,28 +1,9 @@
 import logo from ".././logo.png";
-import styled from "styled-components";
-import "../css/Login.css";
+import "../css/Forgot.css";
 import "../App.css";
 import { Link } from "react-router-dom";
 import { useState } from "react";
-
-let LoginInput = styled.input`
-  background: #f7f8f9;
-  border: 1px solid #dadada;
-  border-radius: 8px;
-  width: 330px;
-  height: 50px;
-  padding-left: 10px;
-`;
-let GreenBtn = styled.button`
-  background: #adc178;
-  border: 1px solid #dadada;
-  border-radius: 8px;
-  width: 340px;
-  height: 50px;
-  text-align: center;
-  color: white;
-  cursor: pointer;
-`;
+import { LoginInput, GreenBtn } from "../components/styled.jsx";
 
 const Login = () => {
   let [inputEmail, setInputEmail] = useState();
@@ -71,7 +52,7 @@ const Login = () => {
         <span>제가</span>
       </div>
       <Link to="/regist" className="regist-find">
-        제가 아직 회원이 아니에요
+        아직 회원이 아니에요
       </Link>
       <Link to="/forgot" className="regist-find">
         비밀번호를 잊어버렸어요
