@@ -1,0 +1,50 @@
+.Login {
+  display: grid;
+  justify-items: center;
+  grid-gap: 1rem;
+  margin-top: 5%;
+}
+
+.form-group {
+  font-size: small;
+  padding-left: 10px;
+  justify-self: start;
+  margin-left: 10px;
+}
+
+.hr-sect {
+  width: 100%;
+  border-bottom: 1px solid #797a7e50;
+  color: white;
+  line-height: 0.1em;
+  margin: 10px;
+}
+
+.hr-sect span {
+  background: #fff;
+  margin-left: 30px;
+  padding: 0 10px;
+  color: #6a707cde;
+}
+
+.social-login-btn {
+  display: flex;
+  justify-content: space-between;
+  gap: 50px;
+}
+
+.social-login-btn img {
+  height: 40px;
+}
+
+.AutoLoginCheckBoxLabel {
+  color: #6a707c;
+}
+
+.regist-find {
+  color: #6a707c;
+  font-size: small;
+  text-align: start;
+  justify-self: start;
+  margin-left: 10px;
+}
