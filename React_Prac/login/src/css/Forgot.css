@@ -1,5 +1,21 @@
 .Forgot {
+  display: grid;
+  justify-content: center;
+  grid-gap: 1rem;
+  margin-top: 5%;
+  width: 400px;
+  align-content: center;
+}
+.Forgot .password {
+  display: grid;
+  justify-items: center;
+  align-items: center;
+  grid-gap: 1rem;
 }
 
-.Forgot h2 {
+.Forgot .email {
+  display: grid;
+  justify-items: center;
+  align-items: center;
+  grid-gap: 1rem;
 }

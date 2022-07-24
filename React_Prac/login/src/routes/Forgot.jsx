@@ -11,7 +11,7 @@ const Forgot = () => {
     <div className="Forgot">
       <h2>비밀 번호 재설정</h2>
       {confirm ? (
-        <div>
+        <div className="password">
           <LoginInput placeholder="비밀번호"></LoginInput>
           <LoginInput placeholder="비밀번호 확인"></LoginInput>
           <Link to="/">
@@ -19,17 +19,17 @@ const Forgot = () => {
           </Link>
         </div>
       ) : (
-        <div>
+        <div className="email">
           <LoginInput placeholder="email"></LoginInput>
           {confirmFlag ? <GreenBtn>인증 메일 다시 보내기</GreenBtn> : null}
           {confirmFlag ? (
-            <div>
+            <div className="confirmForm">
               <LoginInput
                 style={{ width: "205px", marginRight: "10px" }}
                 placeholder="인증 번호"
               ></LoginInput>
               <GreenBtn
-                style={{ width: "105px", marginLeft: "10px" }}
+                style={{ width: "100px", marginLeft: "10px" }}
                 onClick={() => {
                   setConfirm(true);
                 }}
@@ -53,4 +53,5 @@ const Forgot = () => {
   );
 };
 
+const ConfirmCard = () => {};
 export default Forgot;
