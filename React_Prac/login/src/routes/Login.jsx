@@ -1,13 +1,14 @@
 import logo from ".././logo.png";
 import "../css/Forgot.css";
-import "../App.css";
 import { Link } from "react-router-dom";
 import { useState } from "react";
-import { LoginInput, GreenBtn } from "../components/styled.jsx";
+import { LoginInput, GreenBtn, WarningText } from "../components/styled.jsx";
 
 const Login = () => {
   let [inputEmail, setInputEmail] = useState();
   let [inputPassword, setInputPassword] = useState();
+  let [loginWarning, setLoginWarning] = useState(false);
+
   const submitLogin = (e) => {
     e.preventDefault();
     alert(inputEmail + inputPassword);
@@ -35,6 +36,11 @@ const Login = () => {
         </label>
       </div>
       <GreenBtn onClick={submitLogin}>로그인</GreenBtn>
+      {loginWarning ? (
+        <WarningText>
+          등록되지 않은 이메일이거나 비밀번호가 일치하지 않습니다.
+        </WarningText>
+      ) : null}
       <div className="hr-sect">
         <span>sns로 3초만에 시작하기</span>
       </div>

@@ -18,4 +18,9 @@ let GreenBtn = styled.button`
   color: white;
   cursor: pointer;
 `;
-export { GreenBtn, LoginInput };
+
+let WarningText = styled.p`
+  color: red;
+  font-size: small;
+`;
+export { GreenBtn, LoginInput, WarningText };

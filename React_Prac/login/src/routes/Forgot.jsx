@@ -53,5 +53,4 @@ const Forgot = () => {
   );
 };
 
-const ConfirmCard = () => {};
 export default Forgot;
