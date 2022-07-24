@@ -17,6 +17,12 @@ const UserName = () => {
       <LoginInput
         placeholder="최대 8글자"
         style={{ width: "200px" }}
+        maxLength="8"
+        onChange={(e) => {
+          if (e.target.value.length > 8) {
+            e.target.value = e.target.value.substr(0, 8);
+          }
+        }}
       ></LoginInput>
       <GreenBtn
         onClick={() => {

@@ -3,6 +3,7 @@ import "../css/Forgot.css";
 import { Link } from "react-router-dom";
 import { useState } from "react";
 import { LoginInput, GreenBtn, WarningText } from "../components/styled.jsx";
+import axios from "axios";
 
 const Login = () => {
   let [inputEmail, setInputEmail] = useState();
@@ -11,7 +12,16 @@ const Login = () => {
 
   const submitLogin = (e) => {
     e.preventDefault();
-    alert(inputEmail + inputPassword);
+    axios
+      .post("eco/user/login", {
+        email: inputEmail,
+        password: inputPassword,
+        social_type: 0,
+      })
+      .then((res) => {
+        console.log(res);
+      })
+      .catch(setLoginWarning(true));
   };
   return (
     <div className="Login">
